@@ -1,27 +1,27 @@
 // MultiSelect.tsx
 import { LoadingIcon } from '@/assets/icons'
 import { Input } from '@/components/ui/input'
-import { MOCK_DATA_USER } from '@/constants/mock-user'
 import { getFirstAndLastChar } from '@/lib/utils'
-import { SearchUserResult } from '@/types/searchUser'
+import { SearchDataResult } from '@/types/searchUser'
 import React, { useEffect, useState } from 'react'
 
 interface MultiSelectProps {
-  value: SearchUserResult[]
-  onChange: (selected: SearchUserResult[]) => void
+  value: SearchDataResult[]
+  onChange: (selected: SearchDataResult[]) => void
   placeholder?: string
+  data: SearchDataResult[]
 }
 
-const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder }) => {
+const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder, data }) => {
   const [query, setQuery] = useState<string>('')
-  const [filteredOptions, setFilteredOptions] = useState<SearchUserResult[]>([])
+  const [filteredOptions, setFilteredOptions] = useState<SearchDataResult[]>([])
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     if (query.length > 0) {
       setLoading(true)
       setTimeout(() => {
-        const results = MOCK_DATA_USER.filter((data) => data.name.toLowerCase().includes(query.toLowerCase()))
+        const results = data.filter((data) => data.name.toLowerCase().includes(query.toLowerCase()))
         setFilteredOptions(results)
         setLoading(false)
       }, 500)
@@ -30,7 +30,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder 
     }
   }, [query])
 
-  const handleSelectOption = (option: SearchUserResult) => {
+  const handleSelectOption = (option: SearchDataResult) => {
     if (!value.find((selected) => selected.id === option.id)) {
       onChange([...value, option])
     }

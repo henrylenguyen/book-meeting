@@ -1,5 +1,6 @@
 import { ITimeOption } from '@/types/timePicker'
 import { clsx, type ClassValue } from 'clsx'
+import { format, isValid, parseISO } from 'date-fns'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -54,4 +55,45 @@ export const generateTimeOptions = (interval: number): ITimeOption[] => {
   }
 
   return options
+}
+
+export const getEventTime = (selectedDateRange: { start: string; end: string } | null) => {
+  // Hàm định dạng thời gian
+  const formatTime = (date: Date) => {
+    return format(date, 'hh:mm a') // Định dạng theo kiểu 12-hour: 12:31 AM
+  }
+
+  // Hàm định dạng ngày
+  const formatDate = (date: Date) => {
+    return format(date, 'yyyy-MM-dd') // Định dạng ngày giống như new Date().toISOString().split('T')[0]
+  }
+
+  const parseDateTime = (dateTimeStr: string | number | string[] | Date) => {
+    if (Array.isArray(dateTimeStr)) {
+      throw new Error('Invalid dateTimeStr: cannot be an array')
+    }
+
+    const date = typeof dateTimeStr === 'string' ? parseISO(dateTimeStr) : new Date(dateTimeStr)
+    if (!isValid(date)) {
+      return {
+        date: new Date(), // Trả về ngày hiện tại nếu không hợp lệ
+        time: formatTime(new Date()) // Sử dụng hàm formatCurrentTime cho giá trị giờ hiện tại
+      }
+    }
+
+    return {
+      date,
+      time: dateTimeStr.toString().includes('T') ? formatTime(date) : formatTime(new Date())
+    }
+  }
+
+  const start = parseDateTime(selectedDateRange?.start || new Date())
+  const end = parseDateTime(selectedDateRange?.end || new Date())
+
+  return {
+    startDate: formatDate(start.date), // Giữ ngày dưới dạng yyyy-MM-dd
+    startTime: start.time,
+    endDate: formatDate(end.date),
+    endTime: end.time
+  }
 }

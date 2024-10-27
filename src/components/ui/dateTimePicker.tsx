@@ -8,7 +8,7 @@ import { Calendar as CalendarIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
-const DateTimePicker = ({ name , isAllDay }: { name: string, isAllDay?: boolean }) => {
+const DateTimePicker = ({ name, isAllDay }: { name: string; isAllDay?: boolean }) => {
   const { control } = useFormContext()
   const [allDay, setAllDay] = useState(false)
 
@@ -54,7 +54,7 @@ const DateTimePicker = ({ name , isAllDay }: { name: string, isAllDay?: boolean 
                     className='w-[150px] h-[40px]  justify-start text-left font-normal flex gap-2 border border-solid bg-transparent hover:bg-transparent'
                   >
                     {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick End Date'}
-                    <CalendarIcon  />
+                    <CalendarIcon />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className='w-auto p-0'>
@@ -95,11 +95,12 @@ const DateTimePicker = ({ name , isAllDay }: { name: string, isAllDay?: boolean 
       )}
 
       {/* All Day Toggle */}
-      {isAllDay &&   <div className='flex items-center space-x-2'>
-        <Switch checked={allDay} onCheckedChange={setAllDay} />
-        <span>All Day</span>
-      </div>}
-    
+      {isAllDay && (
+        <div className='flex items-center space-x-2'>
+          <Switch checked={allDay} onCheckedChange={setAllDay} />
+          <span>All Day</span>
+        </div>
+      )}
     </div>
   )
 }

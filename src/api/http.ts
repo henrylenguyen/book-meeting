@@ -3,10 +3,21 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 export class Http {
   instance: AxiosInstance
 
-  constructor() {
+  constructor(baseURL: string = 'http://localhost:3000', headers: Record<string, string> = {}) {
+    let authHeader = headers['Authorization'] || localStorage.getItem('Authorization') || null
+
+    if (authHeader && !authHeader.startsWith('Bearer ')) {
+      authHeader = `Bearer ${authHeader}`
+    }
+
     this.instance = axios.create({
-      baseURL: 'http://localhost:3000',
-      timeout: 10000
+      baseURL: baseURL,
+      timeout: 10000,
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers,
+        ...(authHeader ? { Authorization: authHeader } : {})
+      }
     })
   }
 
@@ -32,4 +43,5 @@ export class Http {
 }
 
 const http = new Http().instance
-export default http
+export { http }
+export default Http

@@ -3,10 +3,12 @@ import CalendarHeader from '@/components/layouts/calendar/calendarHeader'
 import EventDialog from '@/components/ui/eventDialog'
 import { useLanguage } from '@/context/languageContext'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list'
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import { format, isBefore, subDays } from 'date-fns'
 import React, { useRef } from 'react'
 
 interface ICalenadarContainerProps { }
@@ -14,12 +16,15 @@ interface ICalenadarContainerProps { }
 const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = () => {
   const calendarRef = useRef<FullCalendar>(null)
   const { language } = useLanguage()
+  const [selectedDateRange, setSelectedDateRange] = React.useState<{ start: string; end: string } | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+
   return (
     <div className='flex flex-col gap-5 flex-1'>
       <CalendarHeader calendarRef={calendarRef} />
       <FullCalendar
         ref={calendarRef}
-        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin, interactionPlugin]}
         initialView='dayGridMonth'
         headerToolbar={false}
         events={[
@@ -43,8 +48,32 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         }}
         slotLabelClassNames='w-[100px] flex items-center justify-center text-gray-500 slotLabel'
         noEventsText={language === 'vi' ? 'Không có sự kiện nào' : 'No events'}
+        selectable={true}
+        select={(info) => {
+          const adjustedEndStr = format(subDays(new Date(info.endStr), 1), 'yyyy-MM-dd')
+
+          setSelectedDateRange({
+            start: info.startStr,
+            end: adjustedEndStr
+          })
+          setIsDialogOpen(true)
+        }}
+        selectAllow={(selectInfo) => {
+          const today = new Date()
+          return !isBefore(selectInfo.start, today)
+        }}
+        dayCellDidMount={(info) => {
+          const today = new Date()
+          if (isBefore(info.date, today)) {
+            info.el.classList.add('fc-day-past')
+          }
+        }}
       />
-      <EventDialog/>
+      <EventDialog
+        selectedDateRange={selectedDateRange}
+        isDialogOpen={isDialogOpen}
+        setIsDialogOpen={setIsDialogOpen}
+      />
     </div>
   )
 }

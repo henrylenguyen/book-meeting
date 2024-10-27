@@ -144,3 +144,15 @@ body {
 .fc .fc-timegrid-axis-frame {
   @apply text-gray-500 justify-center;
 }
+
+.ql-container.ql-snow {
+  border: none;
+  border-bottom: 1px solid #eee;
+  min-height: 200px;
+}
+
+.fc-day-past {
+  background-color: #f0f0f0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}

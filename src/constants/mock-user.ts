@@ -1,6 +1,6 @@
-import { SearchUserResult } from '@/types/searchUser'
+import { SearchDataResult } from '@/types/searchUser'
 
-export const MOCK_DATA_USER: SearchUserResult[] = [
+export const MOCK_DATA_USER: SearchDataResult[] = [
   { id: 1, name: 'Henry Lê Nguyễn', email: 'thailnp133@gmail.com' },
   { id: 2, name: 'Nguyễn Văn B', email: 'nguyenvanb@example.com' },
   { id: 3, name: 'Trần Thị C', email: 'tranthic@gmail.com' },

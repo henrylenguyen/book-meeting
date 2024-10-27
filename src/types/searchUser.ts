@@ -1,5 +1,5 @@
-export interface SearchUserResult {
+export interface SearchDataResult {
   id: number
   name: string
-  email: string
+  email?: string
 }

@@ -1,0 +1,352 @@
+{
+  "appointment-this-month": {
+    "statusCode": 200,
+    "data": [
+      {
+        "id": 1,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Weekly Class",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2, 4, 6],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Class every Tuesday, Thursday, and Saturday morning",
+        "url": "https://example.com/event/1",
+        "share_url": "https://example.com/share/1",
+        "location": "Room A",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FFA500",
+        "status": "normal",
+        "date": "2024-10-30"
+      },
+      {
+        "id": 2,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monday Meeting",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Weekly team meeting every Monday",
+        "url": "https://example.com/event/2",
+        "share_url": "https://example.com/share/2",
+        "location": "Room B",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FF6347",
+        "status": "urgent",
+        "date": "2024-10-30"
+      },
+      {
+        "id": 3,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monthly Review",
+        "recurrence": {
+          "type": "Monthly",
+          "day_of_month": 1,
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Monthly meeting on the 1st of every month",
+        "url": "https://example.com/event/3",
+        "share_url": "https://example.com/share/3",
+        "location": "Room C",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#4682B4",
+        "status": "normal",
+        "date": "2024-10-30"
+      },
+      {
+        "id": 4,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Daily Work Review",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2, 3, 4, 5, 6],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Work review every weekday",
+        "url": "https://example.com/event/4",
+        "share_url": "https://example.com/share/4",
+        "location": "Room D",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#32CD32",
+        "status": "normal",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 5,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Weekend Yoga Session",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [7, 1],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Yoga session every weekend (Saturday and Sunday)",
+        "url": "https://example.com/event/5",
+        "share_url": "https://example.com/share/5",
+        "location": "Room A",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FF69B4",
+        "status": "normal",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 6,
+        "type": "single",
+        "category": "appointment",
+        "title": "Morning Client Meeting",
+        "start_time": "07:00",
+        "end_time": "08:00",
+        "description": "Discussing project requirements",
+        "url": "https://example.com/event/6",
+        "share_url": "https://example.com/share/6",
+        "location": "Room B",
+        "timezone": "(UTC+9) Tokyo, Seoul",
+        "color": "#FFD700",
+        "status": "urgent",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 7,
+        "type": "single",
+        "category": "appointment",
+        "title": "Daily Standup",
+        "start_time": "08:30",
+        "end_time": "09:00",
+        "description": "Quick daily team update",
+        "url": "https://example.com/event/7",
+        "share_url": "https://example.com/share/7",
+        "location": "Room C",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#00BFFF",
+        "status": "normal",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 8,
+        "type": "single",
+        "category": "appointment",
+        "title": "Technical Meeting",
+        "start_time": "10:00",
+        "end_time": "12:00",
+        "description": "Technical discussion on the project",
+        "url": "https://example.com/event/8",
+        "share_url": "https://example.com/share/8",
+        "location": "Room D",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#DC143C",
+        "status": "urgent",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 9,
+        "type": "single",
+        "category": "appointment",
+        "title": "Client Review Meeting",
+        "start_time": "13:00",
+        "end_time": "15:00",
+        "description": "Review progress with the client",
+        "url": "https://example.com/event/9",
+        "share_url": "https://example.com/share/9",
+        "location": "Room A",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#ADFF2F",
+        "status": "normal",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 10,
+        "type": "single",
+        "category": "appointment",
+        "title": "Team Sync-up",
+        "start_time": "16:00",
+        "end_time": "17:00",
+        "description": "Discuss daily progress with the team",
+        "url": "https://example.com/event/10",
+        "share_url": "https://example.com/share/10",
+        "location": "Room B",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#9370DB",
+        "status": "normal",
+        "date": "2024-10-31"
+      },
+      {
+        "id": 11,
+        "type": "conflict",
+        "category": "appointment",
+        "title": "Morning Strategy Session",
+        "start_time": "07:30",
+        "end_time": "09:00",
+        "description": "Planning and strategy discussion",
+        "conflict_with": [6],
+        "url": "https://example.com/event/11",
+        "share_url": "https://example.com/share/11",
+        "location": "Room C",
+        "timezone": "(UTC+9) Tokyo, Seoul",
+        "color": "#FF4500",
+        "status": "urgent",
+        "date": "2024-10-30"
+      },
+      {
+        "id": 12,
+        "type": "single",
+        "category": "appointment",
+        "title": "Morning Client Meeting",
+        "start_time": "07:00",
+        "end_time": "08:00",
+        "description": "Discussing project requirements",
+        "url": "https://example.com/event/6",
+        "share_url": "https://example.com/share/6",
+        "location": "Room B",
+        "timezone": "(UTC+9) Tokyo, Seoul",
+        "color": "#FFD700",
+        "status": "urgent",
+        "date": "2024-10-27"
+      }
+    ],
+    "message": "Events retrieved successfully",
+    "timestamp": "2024-10-23T10:00:00Z"
+  },
+  "appointment-next-year": {
+    "statusCode": 200,
+    "data": [
+      {
+        "id": 1,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Weekly Class",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2, 4, 6],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Class every Tuesday, Thursday, and Saturday morning",
+        "url": "https://example.com/event/1",
+        "share_url": "https://example.com/share/1",
+        "location": "Room A",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FFA500",
+        "status": "normal",
+        "date": "2025-10-30"
+      },
+      {
+        "id": 2,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monday Meeting",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Weekly team meeting every Monday",
+        "url": "https://example.com/event/2",
+        "share_url": "https://example.com/share/2",
+        "location": "Room B",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FF6347",
+        "status": "urgent",
+        "date": "2025-10-30"
+      },
+      {
+        "id": 3,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monthly Review",
+        "recurrence": {
+          "type": "Monthly",
+          "day_of_month": 1,
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Monthly meeting on the 1st of every month",
+        "url": "https://example.com/event/3",
+        "share_url": "https://example.com/share/3",
+        "location": "Room C",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#4682B4",
+        "status": "normal",
+        "date": "2025-10-30"
+      }
+    ]
+  },
+  "appointment-next-month": {
+    "statusCode": 200,
+    "data": [
+      {
+        "id": 1,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Weekly Class",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2, 4, 6],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Class every Tuesday, Thursday, and Saturday morning",
+        "url": "https://example.com/event/1",
+        "share_url": "https://example.com/share/1",
+        "location": "Room A",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FFA500",
+        "status": "normal",
+        "date": "2024-11-30"
+      },
+      {
+        "id": 2,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monday Meeting",
+        "recurrence": {
+          "type": "weekly",
+          "days_of_week": [2],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Weekly team meeting every Monday",
+        "url": "https://example.com/event/2",
+        "share_url": "https://example.com/share/2",
+        "location": "Room B",
+        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+        "color": "#FF6347",
+        "status": "urgent",
+        "date": "2024-11-30"
+      },
+      {
+        "id": 3,
+        "type": "recurring",
+        "category": "appointment",
+        "title": "Monthly Review",
+        "recurrence": {
+          "type": "Monthly",
+          "day_of_month": 1,
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "description": "Monthly meeting on the 1st of every month",
+        "url": "https://example.com/event/3",
+        "share_url": "https://example.com/share/3",
+        "location": "Room C",
+        "timezone": "(UTC+8) Beijing, Singapore",
+        "color": "#4682B4",
+        "status": "normal",
+        "date": "2024-11-30"
+      }
+    ]
+  }
+}

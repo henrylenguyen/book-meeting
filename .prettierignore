@@ -1,0 +1,15 @@
+node_modules/
+dist/
+data/
+/cms-admin/*.html
+/cms-admin/*.json
+/cms-admin/dist/
+/cms-admin/node_modules/
+/frontend/*.html
+/frontend/*.json
+/frontend/dist/
+/frontend/node_modules/
+/frontend/.next/
+/my-docs/node_modules/
+/server/node_modules/
+/server/dist/

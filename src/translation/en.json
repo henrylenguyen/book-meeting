@@ -1,0 +1,14 @@
+{
+  "day": "day",
+  "month": "month",
+  "year": "year",
+  "week": "week",
+  "schedule": "schedule",
+  "today": "today",
+  "back": "back",
+  "view-all": "view all",
+  "up-coming-events": "Upcoming Events",
+  "no-up-coming-events": "No upcoming events",
+  "appointment": "appointment",
+  "event": "event"
+}

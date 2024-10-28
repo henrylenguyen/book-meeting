@@ -8,12 +8,12 @@ interface SingleSelectProps {
   value: string | null | undefined
   onChange: (selected: string) => void
   placeholder?: string
-  data: { id: number; tickets_by: string; name: string }[]
+  data: { id: number; tickets_by: string; title: string }[]
 }
 
-const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholder, data }) => {
+const SingleSelect: React.FC<SingleSelectProps> = ({ onChange, placeholder, data, value }) => {
   const [query, setQuery] = useState<string>('')
-  const [filteredOptions, setFilteredOptions] = useState<{ id: number; tickets_by: string; name: string }[]>([])
+  const [filteredOptions, setFilteredOptions] = useState<{ id: number; tickets_by: string; title: string }[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false)
 
@@ -25,7 +25,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholde
     if (query.length > 0) {
       setLoading(true)
       setTimeout(() => {
-        const results = data.filter((item) => item.tickets_by.toLowerCase().includes(query.toLowerCase()))
+        const results = data.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
         setFilteredOptions(results)
         setLoading(false)
       }, 500)
@@ -34,8 +34,8 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholde
     }
   }, [query, data])
 
-  const handleSelectOption = (option: { id: number; tickets_by: string }) => {
-    onChange(option.tickets_by)
+  const handleSelectOption = (option: { id: number; title: string }) => {
+    onChange(option.title)
     setQuery('')
     setIsPopoverOpen(false)
   }
@@ -59,11 +59,11 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholde
                 onClick={() => handleSelectOption(option)}
               >
                 <div className='relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-blue-dark rounded-full'>
-                  <span className='font-medium text-white '>{getFirstAndLastChar(option.name)}</span>
+                  <span className='font-medium text-white '>{getFirstAndLastChar(option.title)}</span>
                 </div>
 
                 <div className='flex flex-col gap-2 items-start'>
-                  <div className='font-bold'>{option.name}</div>
+                  <div className='font-bold'>{option.title}</div>
                   <div className='text-[12px] text-gray-500'>{option.tickets_by}</div>
                 </div>
               </button>
@@ -77,6 +77,11 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholde
   return (
     <div className='w-full' ref={containerRef}>
       <div className='relative'>
+        {value && (
+          <div className='mt-2'>
+            <span className='px-2 py-1 bg-blue-100 text-blue-700 rounded-full'>{value}</span>
+          </div>
+        )}
         <Input
           type='text'
           className='flex-grow border-0 border-b rounded-none'
@@ -86,16 +91,12 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ value, onChange, placeholde
           onChange={(e) => setQuery(e.target.value)}
         />
         {isPopoverOpen && (
-          <div className='absolute top-full left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-[999999] p-2 h-[200px]'>
+          <div className='absolute top-full left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-[999999] p-2 overflow-y-auto max-h-[200px]'>
             {renderResults()}
           </div>
         )}
       </div>
-      {value && (
-        <div className='mt-2'>
-          <span className='px-2 py-1 bg-blue-100 text-blue-700 rounded-full'>{value}</span>
-        </div>
-      )}
+      
     </div>
   )
 }

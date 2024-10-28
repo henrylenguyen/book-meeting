@@ -56,7 +56,7 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
           }
         }}
       >
-        <SelectTrigger className='w-[200px]'>
+        <SelectTrigger className='w-[200px] border-0 border-b rounded-none border-solid'>
           <SelectValue placeholder={selectedOption} />
         </SelectTrigger>
         <SelectContent>
@@ -102,7 +102,7 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
                 value={value?.repeatUnit ?? 'Day'}
                 onValueChange={(unit) => onChange({ ...value, repeatUnit: unit })}
               >
-                <SelectTrigger className='w-[120px]'>
+                <SelectTrigger className='w-[120px] border-0 border-b rounded-none border-solid'>
                   <SelectValue placeholder={value?.repeatUnit ?? 'Day'} />
                 </SelectTrigger>
                 <SelectContent>

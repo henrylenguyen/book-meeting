@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 export class Http {
   instance: AxiosInstance
 
-  constructor(baseURL: string = 'http://localhost:3000', headers: Record<string, string> = {}) {
+  constructor(baseURL: string = 'http://localhost:3000/api/v1', headers: Record<string, string> = {}) {
     let authHeader = headers['Authorization'] || localStorage.getItem('Authorization') || null
 
     if (authHeader && !authHeader.startsWith('Bearer ')) {

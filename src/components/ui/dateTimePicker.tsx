@@ -18,22 +18,26 @@ const DateTimePicker = ({ name, isAllDay }: { name: string; isAllDay?: boolean }
       <Controller
         name={`${name}.startDate`}
         control={control}
-        render={({ field }) => (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant='outline'
-                className='w-[150px] h-[40px]  justify-start text-left font-normal flex gap-2 border border-solid bg-transparent hover:bg-transparent '
-              >
-                {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick Start Date'}
-                <CalendarIcon />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className='w-auto p-0'>
-              <Calendar selected={new Date(field.value)} onSelect={field.onChange} />
-            </PopoverContent>
-          </Popover>
-        )}
+        render={({ field }) => {
+          return (
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='outline'
+                  className='w-full h-[40px] justify-between items-center font-normal flex gap-2 border-0 border-b border-solid bg-transparent hover:bg-transparent rounded-none'
+                >
+                  <span className='text-[16px]'>
+                    {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick Start Date'}
+                  </span>
+                  <CalendarIcon />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-auto p-0'>
+                <Calendar selected={new Date(field.value)} onSelect={field.onChange} />
+              </PopoverContent>
+            </Popover>
+          )
+        }}
       />
 
       {/* Time Pickers or Duration based on All Day */}
@@ -51,9 +55,12 @@ const DateTimePicker = ({ name, isAllDay }: { name: string; isAllDay?: boolean }
                 <PopoverTrigger asChild>
                   <Button
                     variant='outline'
-                    className='w-[150px] h-[40px]  justify-start text-left font-normal flex gap-2 border border-solid bg-transparent hover:bg-transparent'
+                    className='w-full h-[40px] justify-between items-center font-normal flex gap-2 border-0 border-b border-solid bg-transparent hover:bg-transparent rounded-none '
                   >
-                    {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick End Date'}
+                    <span className='text-[16px]'>
+                      {' '}
+                      {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick End Date'}
+                    </span>
                     <CalendarIcon />
                   </Button>
                 </PopoverTrigger>
@@ -78,9 +85,11 @@ const DateTimePicker = ({ name, isAllDay }: { name: string; isAllDay?: boolean }
                 <PopoverTrigger asChild>
                   <Button
                     variant='outline'
-                    className='w-[150px] h-[40px]  justify-start text-left font-normal flex gap-2 border border-solid bg-transparent hover:bg-transparent '
+                    className='w-full h-[40px] justify-between items-center font-normal flex gap-2 border-0 border-b border-solid bg-transparent hover:bg-transparent rounded-none '
                   >
-                    {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick End Date'}
+                    <span className='text-[16px]'>
+                      {field.value ? format(new Date(field.value), 'MM/dd/yyyy') : 'Pick End Date'}
+                    </span>
                     <CalendarIcon />
                   </Button>
                 </PopoverTrigger>

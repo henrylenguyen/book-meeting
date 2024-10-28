@@ -62,7 +62,7 @@ const TimePicker: React.FC<TimePickerProps> = ({ value, onChange, interval = 15 
           readOnly
           value={initialValue}
           onClick={toggleTimepickerVisibility}
-          className='rounded-lg w-[150px]  h-[40px] border border-stroke bg-transparent py-2.5 pl-[50px] pr-8  outline-none transition '
+          className='rounded-none w-[180px]  h-[40px] border-b border-input border-0 bg-transparent  py-2.5 pl-[50px] pr-8  outline-none transition '
           placeholder='Select a time'
         />
         <span className='absolute right-0 cursor-pointer pr-4 ' ref={toggleRef}>

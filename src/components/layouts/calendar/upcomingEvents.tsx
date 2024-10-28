@@ -1,50 +1,65 @@
 import { emptyBox } from '@/assets/images'
 import EventItems from '@/components/layouts/calendar/eventItem'
+import { Skeleton } from '@/components/ui/skeleton'
 import { typeAppointment } from '@/constants/appointment'
+import { useLanguage } from '@/context/languageContext'
 import useAppointmentStore from '@/store/appointment'
+import useEventStore from '@/store/event'
 import { AppointmentResponse, IAppointmentStore } from '@/types/appointmentType'
-import React, { useEffect, useMemo } from 'react'
+import { IEventStore } from '@/types/eventType'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useLocation } from 'react-router-dom'
 
 interface UpcomingEventsProps { }
 const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
-  const { fetchAllAppointmentThisMonth, appointments } = useAppointmentStore((state) => state as IAppointmentStore)
-
+  const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
+  const { events } = useEventStore((state) => state as IEventStore)
+  const { language } = useLanguage()
   const location = useLocation().pathname.split('/')[2]
   const { t } = useTranslation()
-  useEffect(() => {
-    fetchAllAppointmentThisMonth()
-  }, [])
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  React.useEffect(() => {
+    if (appointments.length > 0 || events.length > 0) {
+      setLoading(false)
+    }
+  }, [appointments.length, events.length])
 
   const upcomingEvents = useMemo(() => {
-    if (location === 'all-appointment') {
-      return appointments.filter((event) => {
-        const eventDate = new Date(event.date)
-        const diffInDays = (eventDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
-        return diffInDays >= 0 && diffInDays <= 7
+    return [...appointments, ...events]
+      .filter((event) => {
+        const eventStartDate = new Date(event.eventTime.startDate)
+        const diffInDays = (eventStartDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+        return diffInDays >= 0 && diffInDays <= 14
       })
-    } else {
-      return appointments
-        .filter((event) => {
-          const eventDate = new Date(event.date)
-          const diffInDays = (eventDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
-          return diffInDays >= 0 && diffInDays <= 7
-        })
-        .slice(0, 4)
-    }
+      .slice(0, location === 'all-appointment' ? undefined : 4)
   }, [appointments, location])
 
   const renderTime = (event: AppointmentResponse) => {
-    if (event.type === typeAppointment.recurring && event.recurrence) {
-      return `${event.recurrence.start_time} - ${event.recurrence.end_time}`
-    } else {
-      return `${event.start_time} - ${event.end_time}`
+    const formatDate = (date: string) => {
+      const [year, month, day] = date.split('-')
+      return language === 'vi' ? `${day}/${month}/${year}` : `${month}/${day}/${year}`
     }
+
+    if (event.eventTime) {
+      const formattedStartDate = formatDate(event.eventTime.startDate)
+      const formattedEndDate = formatDate(event.eventTime.endDate)
+
+      if (event.type === typeAppointment.recurring) {
+        return `${formattedStartDate} ${event.eventTime.startTime} - ${formattedEndDate} ${event.eventTime.endTime}`
+      }
+      return `${formattedStartDate} ${event.eventTime.startTime} - ${formattedEndDate} ${event.eventTime.endTime}`
+    }
+
+    return 'N/A'
   }
-  return (
-    <div className='pr-4 bg-white border-r w-[400px]'>
-      <div className='flex justify-between items-center sticky'>
+
+  return loading ? (
+    <Skeleton className='w-[400px] h-screen flex-1' />
+  ) : (
+    <div className='pr-4 bg-white border-r w-[400px] flex-shink'>
+      <div className='flex justify-between items-center'>
         <h2 className='text-[25px] font-bold text-blue-dark capitalize'>{t('up-coming-events')}</h2>
         {location === 'all-appointment' ? (
           <NavLink className='text-white bg-blue-dark px-3 py-2 rounded-2xl text-[13px] capitalize' to='/'>
@@ -59,7 +74,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
           </NavLink>
         )}
       </div>
-      <div className='mt-4 space-y-4  max-h-[85vh] hover:overflow-y-auto overflow-hidden'>
+      <div className='mt-4 space-y-4 max-h-[85vh] hover:overflow-y-auto overflow-hidden'>
         {upcomingEvents.length > 0 ? (
           upcomingEvents.map((event) => (
             <EventItems

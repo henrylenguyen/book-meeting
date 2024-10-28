@@ -1,4 +1,4 @@
-export interface AppointmentResponse {
+export interface EventResponse {
   id: string
   type: string
   category: string
@@ -13,6 +13,7 @@ export interface AppointmentResponse {
   color: string
   status: string
   attendees: Attendee[]
+  tickets_by: string
 }
 
 export interface Recurrence {
@@ -32,10 +33,10 @@ export interface Attendee {
   email: string
 }
 
-export interface IAppointmentStore {
-  appointments: AppointmentResponse[]
+export interface IEventStore {
+  events: EventResponse[]
+  onlineEvents: EventResponse[]
   loading: boolean
-  fetchAllAppointmentThisMonth: () => Promise<void>
-  createNewAppointment: (appointmentData: Record<string, unknown>) => Promise<void>
+  fetchAllOnlineEvents: () => Promise<void>
   success: boolean
 }

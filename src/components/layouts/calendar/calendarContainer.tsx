@@ -1,7 +1,11 @@
-// Thêm nếu cần sử dụng ref API FullCalendar
 import CalendarHeader from '@/components/layouts/calendar/calendarHeader'
 import EventDialog from '@/components/ui/eventDialog'
 import { useLanguage } from '@/context/languageContext'
+import { calendarEvents } from '@/lib/eventCalendar'
+import useAppointmentStore from '@/store/appointment'
+import useEventStore from '@/store/event'
+import { IAppointmentStore } from '@/types/appointmentType'
+import { IEventStore } from '@/types/eventType'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list'
@@ -10,6 +14,7 @@ import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { format, isBefore, subDays } from 'date-fns'
 import React, { useRef } from 'react'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 interface ICalenadarContainerProps { }
 
@@ -18,6 +23,8 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
   const { language } = useLanguage()
   const [selectedDateRange, setSelectedDateRange] = React.useState<{ start: string; end: string } | null>(null)
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+  const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
+  const { events } = useEventStore((state) => state as IEventStore)
 
   return (
     <div className='flex flex-col gap-5 flex-1'>
@@ -27,10 +34,7 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin, interactionPlugin]}
         initialView='dayGridMonth'
         headerToolbar={false}
-        events={[
-          { title: 'Event 1', date: '2024-10-23' },
-          { title: 'Event 2', date: '2024-10-24' }
-        ]}
+        events={calendarEvents(appointments, events)}
         height='auto'
         dayHeaderContent={(arg) => {
           const dayOfWeek =
@@ -68,12 +72,43 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
             info.el.classList.add('fc-day-past')
           }
         }}
+        eventDidMount={(info) => {
+          // Add attributes required by react-tooltip
+          info.el.setAttribute('data-tooltip-id', 'event-tooltip')
+          const location = info.event.extendedProps.location
+            ? `Location: ${info.event.extendedProps.location}<br/>`
+            : ''
+          const description = info.event.extendedProps.description
+            ? `Description: ${info.event.extendedProps.description}`
+            : ''
+          const attendees = info.event.extendedProps.attendees ? `Attendees: ${info.event.extendedProps.attendees}` : ''
+          info.el.setAttribute(
+            'data-tooltip-html',
+            `
+              <div class='flex flex-col gap-2'>
+              <h1>Title: ${info.event.title}</h1>
+              <span>
+              ${location}
+              </span>
+              <div>
+              ${description}
+              </div>
+              <span>${attendees}</span>
+              </div>
+            `
+          )
+        }}
+        nowIndicator={true}
+        dayMaxEventRows={2} // Limits the number of rows displayed on a single day cell
+        dayMaxEvents={3} // Limits the number of events displayed on a single day cell
+        eventClick={(info) => { }}
       />
       <EventDialog
         selectedDateRange={selectedDateRange}
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
       />
+      <ReactTooltip id='event-tooltip' place='top' />
     </div>
   )
 }

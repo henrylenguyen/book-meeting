@@ -1,352 +1,203 @@
 {
-  "appointment-this-month": {
-    "statusCode": 200,
-    "data": [
-      {
-        "id": 1,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Weekly Class",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2, 4, 6],
-          "start_time": "09:00",
-          "end_time": "10:00"
+  "appointment-this-month": [
+    {
+      "id": "e0b0aa88-5e27-4460-9081-db958d82a862",
+      "type": "single",
+      "category": "appointment",
+      "title": "Daily Standup",
+      "recurrence": {
+        "repeatUnit": "Does not repeat"
+      },
+      "eventTime": {
+        "startDate": "2024-10-30",
+        "startTime": "09:00 AM",
+        "endDate": "2024-10-30",
+        "endTime": "09:30 AM"
+      },
+      "description": "<p>Họp</p>",
+      "url": "https://meet.jit.si/room-kjvomrkd1730095350367?config.prejoinPageEnabled=false&config.startWithAudioMuted=true",
+      "share_url": "",
+      "location": "Hồ Chí Minh",
+      "timezone": "Asia/Bangkok (UTC +7)",
+      "color": "#a61111",
+      "status": "normal",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Henry Lê Nguyễn",
+          "email": "thailnp133@gmail.com"
         },
-        "description": "Class every Tuesday, Thursday, and Saturday morning",
-        "url": "https://example.com/event/1",
-        "share_url": "https://example.com/share/1",
-        "location": "Room A",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FFA500",
-        "status": "normal",
-        "date": "2024-10-30"
+        {
+          "id": 3,
+          "name": "Trần Thị C",
+          "email": "tranthic@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": "7f48c216-8939-4be0-a64f-ef11a6a22857",
+      "type": "recurring",
+      "category": "appointment",
+      "title": "Weekly Class",
+      "recurrence": {
+        "type": "weekly",
+        "days_of_week": [2, 4, 6]
       },
-      {
-        "id": 2,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monday Meeting",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2],
-          "start_time": "09:00",
-          "end_time": "10:00"
+      "eventTime": {
+        "startDate": "2024-10-30",
+        "startTime": "09:00 AM",
+        "endDate": "2024-10-30",
+        "endTime": "10:00 AM"
+      },
+      "description": "Class every Tuesday, Thursday, and Saturday morning",
+      "url": "https://example.com/event/1",
+      "share_url": "https://example.com/share/1",
+      "location": "Room A",
+      "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+      "color": "#FFA500",
+      "status": "normal",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Henry Lê Nguyễn",
+          "email": "thailnp133@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": "2fbe9f99-6544-44bb-a8c6-8d24d8c9b403",
+      "type": "recurring",
+      "category": "appointment",
+      "title": "Monday Meeting",
+      "recurrence": {
+        "type": "weekly",
+        "days_of_week": [2]
+      },
+      "eventTime": {
+        "startDate": "2024-10-30",
+        "startTime": "09:00 AM",
+        "endDate": "2024-10-30",
+        "endTime": "10:00 AM"
+      },
+      "description": "Weekly team meeting every Monday",
+      "url": "https://example.com/event/2",
+      "share_url": "https://example.com/share/2",
+      "location": "Room B",
+      "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
+      "color": "#FF6347",
+      "status": "urgent",
+      "attendees": [
+        {
+          "id": 3,
+          "name": "Trần Thị C",
+          "email": "tranthic@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": "fc0cc66d-0b25-437a-bac9-b58928037efe",
+      "title": "daily",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Henry Lê Nguyễn",
+          "email": "thailnp133@gmail.com"
+        }
+      ],
+      "eventTime": {
+        "startDate": "2024-10-29",
+        "startTime": "03:43 PM",
+        "endDate": "2024-10-31",
+        "endTime": "03:43 PM"
+      },
+      "recurrence": {
+        "repeatUnit": "Does not repeat"
+      },
+      "location": "Hồ Chí Minh",
+      "timezone": "Asia/Bangkok (UTC +7)",
+      "color": "#ffffff",
+      "description": "<p>f</p>",
+      "url": "https://meet.jit.si/room-oimo1b4b1730105058310?config.prejoinPageEnabled=false&config.startWithAudioMuted=true",
+      "type": "single",
+      "category": "appointment",
+      "share_url": ""
+    }
+  ],
+  "appointment-next-year": [
+    {
+      "id": "a3b2c8b2-5e2a-4c2b-9132-4f9f9fcb9af2",
+      "type": "single",
+      "category": "appointment",
+      "title": "Annual Kickoff Meeting",
+      "recurrence": {
+        "repeatUnit": "Does not repeat"
+      },
+      "eventTime": {
+        "startDate": "2025-01-15",
+        "startTime": "09:00 AM",
+        "endDate": "2025-01-15",
+        "endTime": "11:00 AM"
+      },
+      "description": "Kickoff for the new year, covering major initiatives.",
+      "url": "https://example.com/event/kickoff",
+      "share_url": "",
+      "location": "Conference Room 1",
+      "timezone": "Asia/Bangkok (UTC +7)",
+      "color": "#008080",
+      "status": "urgent",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Henry Lê Nguyễn",
+          "email": "henryln@gmail.com"
         },
-        "description": "Weekly team meeting every Monday",
-        "url": "https://example.com/event/2",
-        "share_url": "https://example.com/share/2",
-        "location": "Room B",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FF6347",
-        "status": "urgent",
-        "date": "2024-10-30"
-      },
-      {
-        "id": 3,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monthly Review",
-        "recurrence": {
-          "type": "Monthly",
-          "day_of_month": 1,
-          "start_time": "09:00",
-          "end_time": "10:00"
+        {
+          "id": 2,
+          "name": "Nguyễn Văn A",
+          "email": "nguyenvana@gmail.com"
         },
-        "description": "Monthly meeting on the 1st of every month",
-        "url": "https://example.com/event/3",
-        "share_url": "https://example.com/share/3",
-        "location": "Room C",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#4682B4",
-        "status": "normal",
-        "date": "2024-10-30"
+        {
+          "id": 4,
+          "name": "Mai Thị B",
+          "email": "maithib@gmail.com"
+        }
+      ]
+    }
+  ],
+  "appointment-next-month": [
+    {
+      "id": "f36b6de8-1a2e-4d6f-b3be-8f0a7efcfa9a",
+      "type": "single",
+      "category": "appointment",
+      "title": "Project Review",
+      "recurrence": {
+        "repeatUnit": "Does not repeat"
       },
-      {
-        "id": 4,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Daily Work Review",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2, 3, 4, 5, 6],
-          "start_time": "09:00",
-          "end_time": "10:00"
+      "eventTime": {
+        "startDate": "2024-11-05",
+        "startTime": "02:00 PM",
+        "endDate": "2024-11-05",
+        "endTime": "03:00 PM"
+      },
+      "description": "Monthly project review meeting.",
+      "url": "https://example.com/event/project-review",
+      "share_url": "",
+      "location": "Conference Room B",
+      "timezone": "Asia/Bangkok (UTC +7)",
+      "color": "#4682B4",
+      "status": "normal",
+      "attendees": [
+        {
+          "id": 1,
+          "name": "Henry Lê Nguyễn",
+          "email": "henryln@gmail.com"
         },
-        "description": "Work review every weekday",
-        "url": "https://example.com/event/4",
-        "share_url": "https://example.com/share/4",
-        "location": "Room D",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#32CD32",
-        "status": "normal",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 5,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Weekend Yoga Session",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [7, 1],
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Yoga session every weekend (Saturday and Sunday)",
-        "url": "https://example.com/event/5",
-        "share_url": "https://example.com/share/5",
-        "location": "Room A",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FF69B4",
-        "status": "normal",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 6,
-        "type": "single",
-        "category": "appointment",
-        "title": "Morning Client Meeting",
-        "start_time": "07:00",
-        "end_time": "08:00",
-        "description": "Discussing project requirements",
-        "url": "https://example.com/event/6",
-        "share_url": "https://example.com/share/6",
-        "location": "Room B",
-        "timezone": "(UTC+9) Tokyo, Seoul",
-        "color": "#FFD700",
-        "status": "urgent",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 7,
-        "type": "single",
-        "category": "appointment",
-        "title": "Daily Standup",
-        "start_time": "08:30",
-        "end_time": "09:00",
-        "description": "Quick daily team update",
-        "url": "https://example.com/event/7",
-        "share_url": "https://example.com/share/7",
-        "location": "Room C",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#00BFFF",
-        "status": "normal",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 8,
-        "type": "single",
-        "category": "appointment",
-        "title": "Technical Meeting",
-        "start_time": "10:00",
-        "end_time": "12:00",
-        "description": "Technical discussion on the project",
-        "url": "https://example.com/event/8",
-        "share_url": "https://example.com/share/8",
-        "location": "Room D",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#DC143C",
-        "status": "urgent",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 9,
-        "type": "single",
-        "category": "appointment",
-        "title": "Client Review Meeting",
-        "start_time": "13:00",
-        "end_time": "15:00",
-        "description": "Review progress with the client",
-        "url": "https://example.com/event/9",
-        "share_url": "https://example.com/share/9",
-        "location": "Room A",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#ADFF2F",
-        "status": "normal",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 10,
-        "type": "single",
-        "category": "appointment",
-        "title": "Team Sync-up",
-        "start_time": "16:00",
-        "end_time": "17:00",
-        "description": "Discuss daily progress with the team",
-        "url": "https://example.com/event/10",
-        "share_url": "https://example.com/share/10",
-        "location": "Room B",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#9370DB",
-        "status": "normal",
-        "date": "2024-10-31"
-      },
-      {
-        "id": 11,
-        "type": "conflict",
-        "category": "appointment",
-        "title": "Morning Strategy Session",
-        "start_time": "07:30",
-        "end_time": "09:00",
-        "description": "Planning and strategy discussion",
-        "conflict_with": [6],
-        "url": "https://example.com/event/11",
-        "share_url": "https://example.com/share/11",
-        "location": "Room C",
-        "timezone": "(UTC+9) Tokyo, Seoul",
-        "color": "#FF4500",
-        "status": "urgent",
-        "date": "2024-10-30"
-      },
-      {
-        "id": 12,
-        "type": "single",
-        "category": "appointment",
-        "title": "Morning Client Meeting",
-        "start_time": "07:00",
-        "end_time": "08:00",
-        "description": "Discussing project requirements",
-        "url": "https://example.com/event/6",
-        "share_url": "https://example.com/share/6",
-        "location": "Room B",
-        "timezone": "(UTC+9) Tokyo, Seoul",
-        "color": "#FFD700",
-        "status": "urgent",
-        "date": "2024-10-27"
-      }
-    ],
-    "message": "Events retrieved successfully",
-    "timestamp": "2024-10-23T10:00:00Z"
-  },
-  "appointment-next-year": {
-    "statusCode": 200,
-    "data": [
-      {
-        "id": 1,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Weekly Class",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2, 4, 6],
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Class every Tuesday, Thursday, and Saturday morning",
-        "url": "https://example.com/event/1",
-        "share_url": "https://example.com/share/1",
-        "location": "Room A",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FFA500",
-        "status": "normal",
-        "date": "2025-10-30"
-      },
-      {
-        "id": 2,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monday Meeting",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2],
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Weekly team meeting every Monday",
-        "url": "https://example.com/event/2",
-        "share_url": "https://example.com/share/2",
-        "location": "Room B",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FF6347",
-        "status": "urgent",
-        "date": "2025-10-30"
-      },
-      {
-        "id": 3,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monthly Review",
-        "recurrence": {
-          "type": "Monthly",
-          "day_of_month": 1,
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Monthly meeting on the 1st of every month",
-        "url": "https://example.com/event/3",
-        "share_url": "https://example.com/share/3",
-        "location": "Room C",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#4682B4",
-        "status": "normal",
-        "date": "2025-10-30"
-      }
-    ]
-  },
-  "appointment-next-month": {
-    "statusCode": 200,
-    "data": [
-      {
-        "id": 1,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Weekly Class",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2, 4, 6],
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Class every Tuesday, Thursday, and Saturday morning",
-        "url": "https://example.com/event/1",
-        "share_url": "https://example.com/share/1",
-        "location": "Room A",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FFA500",
-        "status": "normal",
-        "date": "2024-11-30"
-      },
-      {
-        "id": 2,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monday Meeting",
-        "recurrence": {
-          "type": "weekly",
-          "days_of_week": [2],
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Weekly team meeting every Monday",
-        "url": "https://example.com/event/2",
-        "share_url": "https://example.com/share/2",
-        "location": "Room B",
-        "timezone": "(UTC+7) Bangkok, Hanoi, Jakarta",
-        "color": "#FF6347",
-        "status": "urgent",
-        "date": "2024-11-30"
-      },
-      {
-        "id": 3,
-        "type": "recurring",
-        "category": "appointment",
-        "title": "Monthly Review",
-        "recurrence": {
-          "type": "Monthly",
-          "day_of_month": 1,
-          "start_time": "09:00",
-          "end_time": "10:00"
-        },
-        "description": "Monthly meeting on the 1st of every month",
-        "url": "https://example.com/event/3",
-        "share_url": "https://example.com/share/3",
-        "location": "Room C",
-        "timezone": "(UTC+8) Beijing, Singapore",
-        "color": "#4682B4",
-        "status": "normal",
-        "date": "2024-11-30"
-      }
-    ]
-  }
+        {
+          "id": 2,
+          "name": "Nguyễn Văn A",
+          "email": "nguyenvana@gmail.com"
+        }
+      ]
+    }
+  ]
 }

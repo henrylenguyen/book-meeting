@@ -1,4 +1,9 @@
 import { useLanguage } from '@/context/languageContext'
+import { calendarEvents } from '@/lib/eventCalendar'
+import useAppointmentStore from '@/store/appointment'
+import useEventStore from '@/store/event'
+import { IAppointmentStore } from '@/types/appointmentType'
+import { IEventStore } from '@/types/eventType'
 import listPlugin from '@fullcalendar/list'
 import FullCalendar from '@fullcalendar/react'
 import * as React from 'react'
@@ -7,17 +12,17 @@ interface IAllAppointmentPageProps { }
 
 const AllAppointmentPage: React.FunctionComponent<IAllAppointmentPageProps> = React.memo(() => {
   const { language } = useLanguage()
+  const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
+  const { events } = useEventStore((state) => state as IEventStore)
+
   return (
     <div className='flex-1'>
       <FullCalendar
         plugins={[listPlugin]}
         initialView='listMonth'
         headerToolbar={false}
-        height='auto'
-        events={[
-          { title: 'Event 1', date: '2024-10-23' },
-          { title: 'Event 2', date: '2024-10-24' }
-        ]}
+        height='95vh'
+        events={calendarEvents(appointments, events)}
         dayHeaderContent={(arg) => {
           const dayOfWeek =
             language === 'vi'

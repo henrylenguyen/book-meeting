@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ITimeOption } from '@/types/timePicker'
 import { clsx, type ClassValue } from 'clsx'
 import { format, isValid, parseISO } from 'date-fns'
+import moment from 'moment-timezone'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -57,7 +59,7 @@ export const generateTimeOptions = (interval: number): ITimeOption[] => {
   return options
 }
 
-export const getEventTime = (selectedDateRange: { start: string; end: string } | null) => {
+export const getEventTime: any = (selectedDateRange: { start: string; end: string } | null) => {
   // Hàm định dạng thời gian
   const formatTime = (date: Date) => {
     return format(date, 'hh:mm a') // Định dạng theo kiểu 12-hour: 12:31 AM
@@ -95,5 +97,34 @@ export const getEventTime = (selectedDateRange: { start: string; end: string } |
     startTime: start.time,
     endDate: formatDate(end.date),
     endTime: end.time
+  }
+}
+
+export const formatTimezone = (tz) => {
+  const offset = moment.tz(tz).utcOffset() / 60
+  const sign = offset >= 0 ? '+' : '-'
+  return `${tz} (UTC ${sign}${Math.abs(offset)})`
+}
+export const systemTimezone = formatTimezone(moment.tz.guess())
+
+export const generateJitsiURL = () => {
+  const roomName = 'room-' + Math.random().toString(36).substring(2, 10) + Date.now()
+  const jitsiURL = `https://meet.jit.si/${roomName}?config.prejoinPageEnabled=false&config.startWithAudioMuted=true`
+
+  return jitsiURL
+}
+
+// Function to convert date and time to ISO format
+export const formatDateTimeToIOS = (date: string, time: string, timezone: string) => {
+  // Combine date and time strings
+  const dateTimeString = `${date} ${time}`
+
+  try {
+    // Parse and format with timezone support
+    const formattedDateTime = moment.tz(dateTimeString, timezone).format('YYYY-MM-DDTHH:mm:ssZ')
+    return formattedDateTime
+  } catch (error) {
+    console.error('Error formatting date and time:', error)
+    return null
   }
 }

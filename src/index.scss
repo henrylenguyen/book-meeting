@@ -150,9 +150,20 @@ body {
   border-bottom: 1px solid #eee;
   min-height: 200px;
 }
-
+.ql-editor.ql-blank {
+  min-height: 200px;
+  height: 100%;
+}
 .fc-day-past {
   background-color: #f0f0f0;
   color: #a0a0a0;
   cursor: not-allowed;
+}
+#event-tooltip {
+  z-index: 99999999;
+  max-width: 400px;
+  @apply bg-blue-dark text-white rounded-lg p-4;
+  ul {
+    @apply list-disc list-inside;
+  }
 }

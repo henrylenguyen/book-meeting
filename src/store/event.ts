@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import eventAPI from '@/api/eventAPI'
 import toast from 'react-hot-toast'
 import { create } from 'zustand'
@@ -25,7 +26,7 @@ const useEventStore = create(
           try {
             const response = await eventAPI.createNewEvent(eventData)
             if (response?.status === 201) {
-              set((state) => ({
+              set((state: any) => ({
                 events: [...state.events, response?.data.data],
                 loading: false,
                 success: true

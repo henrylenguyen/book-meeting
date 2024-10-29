@@ -100,7 +100,7 @@ export const getEventTime: any = (selectedDateRange: { start: string; end: strin
   }
 }
 
-export const formatTimezone = (tz) => {
+export const formatTimezone = (tz: string) => {
   const offset = moment.tz(tz).utcOffset() / 60
   const sign = offset >= 0 ? '+' : '-'
   return `${tz} (UTC ${sign}${Math.abs(offset)})`

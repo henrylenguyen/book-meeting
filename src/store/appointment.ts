@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import appointmentAPI from '@/api/appointmentAPI'
 import toast from 'react-hot-toast'
 import { create } from 'zustand'
@@ -28,7 +29,7 @@ const useAppointmentStore = create(
           try {
             const response = await appointmentAPI.createAppointment(appointmentData)
             if (response?.status === 201) {
-              set((state) => ({
+              set((state: any) => ({
                 appointments: [...state.appointments, response?.data.data],
                 loading: false,
                 success: true

@@ -1,6 +1,6 @@
 # Dự án interview 
 
-Link deploy 👉 https://cms-basic-c70f4.web.app/create-product
+Link deploy 👉 https://booking-event-2e8cc.web.app/
 
 ## Hướng dẫn sử dụng:
 1. clone project về thông qua lệnh ở ***terminal***

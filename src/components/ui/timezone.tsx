@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import useInfiniteScroll from '@/hooks/useInfiniteScroll'
 import { formatTimezone, systemTimezone } from '@/lib/utils'
@@ -25,7 +26,7 @@ const TimezoneDropdown: React.FC<TimezoneDropdownProps> = ({ onChange }) => {
         <SelectValue placeholder={systemTimezone ?? 'Time Zone'} />
       </SelectTrigger>
       <SelectContent className='timezone-content'>
-        {itemsData.map((tz) => (
+        {itemsData.map((tz: any) => (
           <SelectItem key={tz} value={tz}>
             {formatTimezone(tz)}
           </SelectItem>

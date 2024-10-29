@@ -35,7 +35,6 @@ const useAppointmentStore = create(
               }))
 
               toast.success('Appointment created successfully')
-
             }
           } catch (error) {
             set({ loading: false })

@@ -54,7 +54,7 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
         events: '',
         eventTime: getEventTime(selectedDateRange)
       }),
-      []
+      [selectedDateRange]
     )
   })
 

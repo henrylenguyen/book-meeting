@@ -10,8 +10,9 @@ interface EditorProps {
   onChange?: (html: string) => void
 }
 
-const Editor: React.FC<EditorProps> = ({ placeholder, value, onChange }) => {
-  const handleChange = (html) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Editor: React.FC<EditorProps> & { modules?: any; formats?: any } = ({ placeholder, value, onChange }) => {
+  const handleChange = (html: string) => {
     if (onChange) {
       onChange(html)
     }

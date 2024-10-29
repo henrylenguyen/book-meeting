@@ -1,5 +1,5 @@
 // src/index.ts
-import cors from 'cors'; // Thêm import cho cors
+import cors from 'cors' // Thêm import cho cors
 import express from 'express'
 import appointmentRouter from './routes/appointmentRouter'
 import eventsRouter from './routes/eventRouter'

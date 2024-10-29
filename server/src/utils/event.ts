@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const removeUndefinedFields = (obj: any) => {
+  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
   return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== undefined))
 }
 export const mapEventData = (event: any) => ({

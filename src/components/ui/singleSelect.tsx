@@ -96,7 +96,6 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ onChange, placeholder, data
           </div>
         )}
       </div>
-      
     </div>
   )
 }

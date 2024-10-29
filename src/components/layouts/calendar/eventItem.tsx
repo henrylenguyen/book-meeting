@@ -1,6 +1,6 @@
-import { CameraIcon } from '@/assets/icons'; // Assuming you have an icon like this
+import { CameraIcon } from '@/assets/icons' // Assuming you have an icon like this
 import React from 'react'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 interface EventItemsProps {
   title: string

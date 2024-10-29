@@ -10,7 +10,6 @@ interface TimezoneDropdownProps {
 const TimezoneDropdown: React.FC<TimezoneDropdownProps> = ({ onChange }) => {
   const timezones = moment.tz.names()
 
-
   const { itemsData } = useInfiniteScroll({
     items: timezones,
     itemsPerPage: 15,

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
-import { db } from '../firebase'; // Đảm bảo bạn đã cấu hình Firestore trong file này
+import { db } from '../firebase' // Đảm bảo bạn đã cấu hình Firestore trong file này
 
 import { IAppointment } from '../types/appointment'
-import createResponse from '../utils/dataResponse'; // Hàm tạo phản hồi chuẩn
-import { removeUndefinedFields } from '../utils/event';
+import createResponse from '../utils/dataResponse' // Hàm tạo phản hồi chuẩn
+import { removeUndefinedFields } from '../utils/event'
 
 // Tạo mới một cuộc hẹn và lưu vào Firestore
 export const createAppointment = async (req: Request, res: Response): Promise<void> => {

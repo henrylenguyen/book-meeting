@@ -8,7 +8,7 @@ import listPlugin from '@fullcalendar/list'
 import FullCalendar from '@fullcalendar/react'
 import * as React from 'react'
 
-interface IAllAppointmentPageProps { }
+interface IAllAppointmentPageProps {}
 
 const AllAppointmentPage: React.FunctionComponent<IAllAppointmentPageProps> = React.memo(() => {
   const { language } = useLanguage()

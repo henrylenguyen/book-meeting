@@ -36,11 +36,14 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
 
   const handleSaveRecurrence = () => {
     setIsCustomDialogOpen(false)
-    onChange({
-      ...value,
-      repeatEvery: value.repeatEvery,
-      repeatUnit: selectedOption
-    })
+    if (value) {
+      onChange({
+        startDate: value.startDate,
+        endDate: value.endDate,
+        repeatEvery: value.repeatEvery,
+        repeatUnit: selectedOption
+      })
+    }
   }
 
   return (
@@ -52,7 +55,12 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
           if (newValue === 'Custom') {
             setIsCustomDialogOpen(true)
           } else {
-            onChange({ ...value, repeatUnit: newValue, repeatEvery: 1 })
+            onChange({
+              startDate: value?.startDate,
+              endDate: value?.endDate,
+              repeatUnit: newValue,
+              repeatEvery: 1
+            })
           }
         }}
       >
@@ -85,7 +93,15 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
               <span className='block text-sm font-medium text-gray-700'>Start</span>
               <DatePicker
                 value={value?.startDate ?? new Date()}
-                onChange={(date) => onChange({ ...value, startDate: date })}
+                onChange={(date) =>
+                  onChange({
+                    ...value,
+                    startDate: date,
+                    endDate: value?.endDate,
+                    repeatEvery: value?.repeatEvery ?? 1,
+                    repeatUnit: value?.repeatUnit ?? 'Day'
+                  })
+                }
               />
             </div>
 
@@ -95,12 +111,26 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
               <Input
                 type='number'
                 value={value?.repeatEvery ?? 1}
-                onChange={(e) => onChange({ ...value, repeatEvery: parseInt(e.target.value, 10) })}
+                onChange={(e) =>
+                  onChange({
+                    startDate: value?.startDate,
+                    endDate: value?.endDate,
+                    repeatEvery: parseInt(e.target.value, 10),
+                    repeatUnit: value?.repeatUnit || 'Day'
+                  })
+                }
                 className='w-16'
               />
               <Select
                 value={value?.repeatUnit ?? 'Day'}
-                onValueChange={(unit) => onChange({ ...value, repeatUnit: unit })}
+                onValueChange={(unit) =>
+                  onChange({
+                    startDate: value?.startDate,
+                    endDate: value?.endDate,
+                    repeatEvery: value?.repeatEvery ?? 1,
+                    repeatUnit: unit
+                  })
+                }
               >
                 <SelectTrigger className='w-[120px] border-0 border-b rounded-none border-solid'>
                   <SelectValue placeholder={value?.repeatUnit ?? 'Day'} />
@@ -119,7 +149,14 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
               <span className='block text-sm font-medium text-gray-700'>End</span>
               <DatePicker
                 value={value?.endDate ?? new Date()}
-                onChange={(date) => onChange({ ...value, endDate: date })}
+                onChange={(date) =>
+                  onChange({
+                    startDate: value?.startDate ?? new Date(),
+                    endDate: date,
+                    repeatEvery: value?.repeatEvery ?? 1,
+                    repeatUnit: value?.repeatUnit ?? 'Day'
+                  })
+                }
               />
             </div>
 

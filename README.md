@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# Dự án interview 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Link deploy 👉 https://cms-basic-c70f4.web.app/create-product
 
-Currently, two official plugins are available:
+## Hướng dẫn sử dụng:
+1. clone project về thông qua lệnh ở ***terminal***
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
 
-## Expanding the ESLint configuration
+  git clone https://github.com/henrylenguyen/book-meeting.git
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```
+2. Chạy lệnh dưới để cài đặt các package
 
-- Configure the top-level `parserOptions` property like this:
+```bash
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+  npm i
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Sau khi cài đặt xong ***node_modules*** tiếp tục với lệnh sau để chạy dự án
+
+```bash
+
+npm start
+
+```
+
+Lệnh này sẽ chạy ***server*** lẫn ***client*** cùng lúc
+
+
+# Cài firebase sdk
+ Mở thư mục **Server** tìm tới file **firebase-sdk.json** sao chép sdk từ đường link dưới và dán vào 
+https://docs.google.com/document/d/1Q-Rt04HOLde-D1P1CM8pLjSt2RK6qm-Vw0srM7hR710/edit?usp=sharing

@@ -32,7 +32,6 @@ const useEventStore = create(
               }))
 
               toast.success('Event created successfully')
-
             }
           } catch (error) {
             set({ loading: false })

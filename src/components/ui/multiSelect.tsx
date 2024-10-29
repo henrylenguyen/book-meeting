@@ -28,7 +28,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder,
     } else {
       setFilteredOptions([])
     }
-  }, [query])
+  }, [data, query])
 
   const handleSelectOption = (option: SearchDataResult) => {
     if (!value.find((selected) => selected.id === option.id)) {

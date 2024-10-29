@@ -16,6 +16,7 @@ import { format, isBefore, subDays } from 'date-fns'
 import React, { useRef } from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
+// eslint-disable-next-line prettier/prettier
 interface ICalenadarContainerProps { }
 
 const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = () => {
@@ -101,7 +102,7 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         nowIndicator={true}
         dayMaxEventRows={2} // Limits the number of rows displayed on a single day cell
         dayMaxEvents={3} // Limits the number of events displayed on a single day cell
-        eventClick={(info) => { }}
+        // eventClick={(info) => { }}
       />
       <EventDialog
         selectedDateRange={selectedDateRange}

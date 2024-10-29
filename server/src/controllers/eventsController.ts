@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Request, Response } from 'express'
-import { db } from '../firebase'; // Nếu bạn muốn lưu thông tin sự kiện vào Firestore
+import { db } from '../firebase' // Nếu bạn muốn lưu thông tin sự kiện vào Firestore
 import eventbriteAPI from '../services/api'
+import { IAppointment } from '../types/appointment'
 import createResponse from '../utils/dataResponse'
 import { mapEventData, removeUndefinedFields } from '../utils/event'
-import { IAppointment } from '../types/appointment';
 
 // Lấy tất cả sự kiện online từ Eventbrite
 export const getAllOnlineEvents = async (req: Request, res: Response): Promise<void> => {
@@ -37,7 +37,6 @@ export const getAllOnlineEvents = async (req: Request, res: Response): Promise<v
   }
 }
 export const createEvent = async (req: Request, res: Response): Promise<void> => {
-
   try {
     // Lấy dữ liệu từ body của request
     const {

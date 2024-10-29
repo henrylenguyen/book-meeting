@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 interface IUseInfiniteScroll {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   items: any
   query?: Element | string | null
   itemsPerPage: number
@@ -54,7 +55,7 @@ const useInfiniteScroll = ({ items, query, itemsPerPage = 1 }: IUseInfiniteScrol
     } else {
       setHasMoreData(true)
     }
-  }, [startIndex, items, items.length])
+  }, [startIndex, items, items.length, itemsPerPage])
 
   useEffect(() => {
     if (query && typeof query !== 'string') {

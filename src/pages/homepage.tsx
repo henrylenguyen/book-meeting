@@ -6,7 +6,7 @@ import { IAppointmentStore } from '@/types/appointmentType'
 import { IEventStore } from '@/types/eventType'
 import React, { useEffect } from 'react'
 
-interface IHomePageProps { }
+interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = React.memo(() => {
   const { fetchAllAppointmentThisMonth } = useAppointmentStore((state) => state as IAppointmentStore)
@@ -23,6 +23,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = React.memo(() => {
         console.error('Error fetching data:', error)
         setLoading(false)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return loading ? <Skeleton className='w-screen h-screen' /> : <CalenadarContainer />
 })

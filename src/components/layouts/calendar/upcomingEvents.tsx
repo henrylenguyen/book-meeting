@@ -11,6 +11,7 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useLocation } from 'react-router-dom'
 
+// eslint-disable-next-line prettier/prettier
 interface UpcomingEventsProps { }
 const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
   const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
@@ -34,7 +35,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
         return diffInDays >= 0 && diffInDays <= 14
       })
       .slice(0, location === 'all-appointment' ? undefined : 4)
-  }, [appointments, location])
+  }, [appointments, events, location])
 
   const renderTime = (event: AppointmentResponse) => {
     const formatDate = (date: string) => {

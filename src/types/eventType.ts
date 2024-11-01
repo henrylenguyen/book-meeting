@@ -39,4 +39,5 @@ export interface IEventStore {
   loading: boolean
   fetchAllOnlineEvents: () => Promise<void>
   success: boolean
+  fetchAllEvents: () => Promise<void>
 }

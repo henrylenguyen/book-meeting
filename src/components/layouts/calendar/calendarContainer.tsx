@@ -27,6 +27,7 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
   const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
   const { events } = useEventStore((state) => state as IEventStore)
 
+
   return (
     <div className='flex flex-col gap-5 flex-1'>
       <CalendarHeader calendarRef={calendarRef} />

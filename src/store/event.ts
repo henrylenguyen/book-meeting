@@ -21,6 +21,16 @@ const useEventStore = create(
             console.error('Error fetching events:', error)
           }
         },
+        fetchAllEvents: async () => {
+          set({ loading: true })
+          try {
+            const response = await eventAPI.getAllEvents()
+            set(() => ({ events: response.data, loading: false }))
+          } catch (error) {
+            set({ loading: false })
+            console.error('Error fetching events:', error)
+          }
+        },
         createNewEvent: async (eventData: Record<string, unknown>) => {
           set({ loading: true })
           try {

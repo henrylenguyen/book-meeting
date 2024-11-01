@@ -6,15 +6,15 @@ import { IAppointmentStore } from '@/types/appointmentType'
 import { IEventStore } from '@/types/eventType'
 import React, { useEffect } from 'react'
 
-interface IHomePageProps {}
+interface IHomePageProps { }
 
 const HomePage: React.FunctionComponent<IHomePageProps> = React.memo(() => {
   const { fetchAllAppointmentThisMonth } = useAppointmentStore((state) => state as IAppointmentStore)
-  const { fetchAllOnlineEvents } = useEventStore((state) => state as IEventStore)
+  const { fetchAllOnlineEvents, fetchAllEvents } = useEventStore((state) => state as IEventStore)
   const [loading, setLoading] = React.useState<boolean>(true)
 
   useEffect(() => {
-    Promise.all([fetchAllAppointmentThisMonth(), fetchAllOnlineEvents()])
+    Promise.all([fetchAllAppointmentThisMonth(), fetchAllOnlineEvents(), fetchAllEvents()])
       .then(() => {
         console.log('All data fetched successfully')
         setLoading(false)

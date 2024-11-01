@@ -20,6 +20,16 @@ const eventAPI = {
     } catch (error) {
       throw new Error(error as string)
     }
+  },
+  getAllEvents: async () => {
+    try {
+      const res = await http.get('/events')
+      if (res.status === 200) {
+        return res.data
+      }
+    } catch (error) {
+      throw new Error(error as string)
+    }
   }
 }
 

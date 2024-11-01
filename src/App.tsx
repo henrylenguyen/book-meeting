@@ -5,7 +5,6 @@ import './i18n'
 
 const HomePage = lazy(() => import('@/pages/homepage'))
 const AllAppointmentPage = lazy(() => import('@/pages/allAppointment'))
-
 function App() {
   const routes = useRoutes([
     {
@@ -15,7 +14,7 @@ function App() {
         {
           path: '',
           element: (
-            <Suspense fallback={<>.</>}>
+            <Suspense fallback={<></>}>
               <HomePage />
             </Suspense>
           )

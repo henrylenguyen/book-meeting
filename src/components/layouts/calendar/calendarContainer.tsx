@@ -1,11 +1,9 @@
 import CalendarHeader from '@/components/layouts/calendar/calendarHeader'
 import EventDialog from '@/components/ui/eventDialog'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useLanguage } from '@/context/languageContext'
+import { useFetchAppointmentsAndEvents } from '@/hooks/useAppointmentEvent'
 import { calendarEvents } from '@/lib/eventCalendar'
-import useAppointmentStore from '@/store/appointment'
-import useEventStore from '@/store/event'
-import { IAppointmentStore } from '@/types/appointmentType'
-import { IEventStore } from '@/types/eventType'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list'
@@ -16,6 +14,8 @@ import { format, isBefore, subDays } from 'date-fns'
 import React, { useRef } from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
+// Lazy load component
+
 // eslint-disable-next-line prettier/prettier
 interface ICalenadarContainerProps { }
 
@@ -24,11 +24,12 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
   const { language } = useLanguage()
   const [selectedDateRange, setSelectedDateRange] = React.useState<{ start: string; end: string } | null>(null)
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
-  const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
-  const { events } = useEventStore((state) => state as IEventStore)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { dataAppointment, dataEvents, isLoading } = useFetchAppointmentsAndEvents()
 
-
-  return (
+  return isLoading ? (
+    <Skeleton className='w-screen h-screen' />
+  ) : (
     <div className='flex flex-col gap-5 flex-1'>
       <CalendarHeader calendarRef={calendarRef} />
       <FullCalendar
@@ -36,7 +37,7 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin, interactionPlugin]}
         initialView='dayGridMonth'
         headerToolbar={false}
-        events={calendarEvents(appointments, events)}
+        events={calendarEvents(dataAppointment, dataEvents)}
         height='auto'
         dayHeaderContent={(arg) => {
           const dayOfWeek =
@@ -103,13 +104,15 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         nowIndicator={true}
         dayMaxEventRows={2} // Limits the number of rows displayed on a single day cell
         dayMaxEvents={3} // Limits the number of events displayed on a single day cell
-        // eventClick={(info) => { }}
+      // eventClick={(info) => { }}
       />
-      <EventDialog
-        selectedDateRange={selectedDateRange}
-        isDialogOpen={isDialogOpen}
-        setIsDialogOpen={setIsDialogOpen}
-      />
+      {isDialogOpen && (
+        <EventDialog
+          selectedDateRange={selectedDateRange}
+          isDialogOpen={isDialogOpen}
+          setIsDialogOpen={setIsDialogOpen}
+        />
+      )}
       <ReactTooltip id='event-tooltip' place='top' />
     </div>
   )

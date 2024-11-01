@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ITimeOption } from '@/types/timePicker'
 import { clsx, type ClassValue } from 'clsx'
-import { format, isValid, parseISO } from 'date-fns'
+import { format, formatISO, isValid, parse, parseISO } from 'date-fns'
 import moment from 'moment-timezone'
 import { twMerge } from 'tailwind-merge'
 
@@ -114,15 +114,21 @@ export const generateJitsiURL = () => {
   return jitsiURL
 }
 
-// Function to convert date and time to ISO format
-export const formatDateTimeToIOS = (date: string, time: string, timezone: string) => {
-  // Combine date and time strings
-  const dateTimeString = `${date} ${time}`
-
+export const formatDateTimeToISO = (date: string, time: string) => {
   try {
-    // Parse and format with timezone support
-    const formattedDateTime = moment.tz(dateTimeString, timezone).format('YYYY-MM-DDTHH:mm:ssZ')
-    return formattedDateTime
+    // Determine parsing pattern based on time format
+    const pattern = time.includes('AM') || time.includes('PM') ? 'yyyy-MM-dd hh:mm a' : 'yyyy-MM-dd HH:mm'
+
+    // Combine date and time into one string and parse it
+    const dateTimeString = `${date} ${time}`
+    const parsedDate = parse(dateTimeString, pattern, new Date())
+
+    if (isValid(parsedDate)) {
+      return formatISO(parsedDate)
+    } else {
+      console.error('Invalid date or time:', dateTimeString)
+      return null
+    }
   } catch (error) {
     console.error('Error formatting date and time:', error)
     return null

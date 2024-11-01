@@ -1,31 +1,10 @@
 import CalenadarContainer from '@/components/layouts/calendar/calendarContainer'
-import { Skeleton } from '@/components/ui/skeleton'
-import useAppointmentStore from '@/store/appointment'
-import useEventStore from '@/store/event'
-import { IAppointmentStore } from '@/types/appointmentType'
-import { IEventStore } from '@/types/eventType'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 interface IHomePageProps { }
 
 const HomePage: React.FunctionComponent<IHomePageProps> = React.memo(() => {
-  const { fetchAllAppointmentThisMonth } = useAppointmentStore((state) => state as IAppointmentStore)
-  const { fetchAllOnlineEvents, fetchAllEvents } = useEventStore((state) => state as IEventStore)
-  const [loading, setLoading] = React.useState<boolean>(true)
-
-  useEffect(() => {
-    Promise.all([fetchAllAppointmentThisMonth(), fetchAllOnlineEvents(), fetchAllEvents()])
-      .then(() => {
-        console.log('All data fetched successfully')
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error)
-        setLoading(false)
-      })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  return loading ? <Skeleton className='w-screen h-screen' /> : <CalenadarContainer />
+  return <CalenadarContainer />
 })
 
 export default HomePage

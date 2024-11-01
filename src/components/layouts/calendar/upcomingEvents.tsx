@@ -34,6 +34,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
         })
         .sort((a, b) => new Date(a.eventTime?.startDate).getTime() - new Date(b.eventTime?.startDate).getTime())
     }
+    return []
   }, [dataAppointment, dataEvents])
 
   const renderTime = (event: AppointmentResponse) => {
@@ -75,7 +76,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
         )}
       </div>
       <div className='mt-4 space-y-4 max-h-[85vh] hover:overflow-y-auto overflow-hidden'>
-        {upcomingEvents.length > 0 ? (
+        {upcomingEvents?.length > 0 ? (
           upcomingEvents.map((event) => (
             <EventItems
               key={event.id}

@@ -1,8 +1,10 @@
 import BaseLayout from '@/components/layouts/baseLayout'
-import AllAppointmentPage from '@/pages/allAppointment'
-import HomePage from '@/pages/homepage'
+import { lazy, Suspense } from 'react'
 import { useRoutes } from 'react-router-dom'
 import './i18n'
+
+const HomePage = lazy(() => import('@/pages/homepage'))
+const AllAppointmentPage = lazy(() => import('@/pages/allAppointment'))
 
 function App() {
   const routes = useRoutes([
@@ -12,11 +14,19 @@ function App() {
       children: [
         {
           path: '',
-          element: <HomePage />
+          element: (
+            <Suspense fallback={<>.</>}>
+              <HomePage />
+            </Suspense>
+          )
         },
         {
           path: 'all-appointment',
-          element: <AllAppointmentPage />
+          element: (
+            <Suspense fallback={<></>}>
+              <AllAppointmentPage />
+            </Suspense>
+          )
         }
       ]
     }

@@ -3,4 +3,3 @@ export interface IDataResponse {
   data: any[]
   message: string
 }
-

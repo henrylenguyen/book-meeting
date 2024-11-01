@@ -3,10 +3,8 @@ import EventItems from '@/components/layouts/calendar/eventItem'
 import { Skeleton } from '@/components/ui/skeleton'
 import { typeAppointment } from '@/constants/appointment'
 import { useLanguage } from '@/context/languageContext'
-import useAppointmentStore from '@/store/appointment'
-import useEventStore from '@/store/event'
-import { AppointmentResponse, IAppointmentStore } from '@/types/appointmentType'
-import { IEventStore } from '@/types/eventType'
+import { useFetchAppointmentsAndEvents } from '@/hooks/useAppointmentEvent'
+import { AppointmentResponse } from '@/types/appointmentType'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -14,28 +12,29 @@ import { NavLink, useLocation } from 'react-router-dom'
 // eslint-disable-next-line prettier/prettier
 interface UpcomingEventsProps { }
 const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
-  const { appointments } = useAppointmentStore((state) => state as IAppointmentStore)
-  const { events } = useEventStore((state) => state as IEventStore)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { dataAppointment, dataEvents, isLoading } = useFetchAppointmentsAndEvents()
   const { language } = useLanguage()
   const location = useLocation().pathname.split('/')[2]
   const { t } = useTranslation()
-  const [loading, setLoading] = React.useState<boolean>(true)
-
-  React.useEffect(() => {
-    if (appointments.length > 0 || events.length > 0) {
-      setLoading(false)
-    }
-  }, [appointments.length, events.length])
 
   const upcomingEvents = useMemo(() => {
-    return [...appointments, ...events]
-      .filter((event) => {
-        const eventStartDate = new Date(event.eventTime.startDate)
-        const diffInDays = (eventStartDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
-        return diffInDays >= 0 && diffInDays <= 14
-      })
-      .slice(0, location === 'all-appointment' ? undefined : 4)
-  }, [appointments, events, location])
+    if (dataAppointment && dataEvents) {
+      return [...dataAppointment, ...dataEvents]
+        .filter((event) => {
+          const now = new Date()
+          const oneWeekLater = new Date()
+          oneWeekLater.setDate(now.getDate() + 7)
+
+          const startDate = new Date(event.eventTime?.startDate)
+          const endDate = new Date(event.eventTime?.endDate)
+
+          // Kiểm tra nếu startDate hoặc endDate nằm trong khoảng từ hôm nay đến 1 tuần nữa
+          return (startDate >= now && startDate <= oneWeekLater) || (endDate >= now && endDate <= oneWeekLater)
+        })
+        .sort((a, b) => new Date(a.eventTime?.startDate).getTime() - new Date(b.eventTime?.startDate).getTime())
+    }
+  }, [dataAppointment, dataEvents])
 
   const renderTime = (event: AppointmentResponse) => {
     const formatDate = (date: string) => {
@@ -56,7 +55,7 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = () => {
     return 'N/A'
   }
 
-  return loading ? (
+  return isLoading ? (
     <Skeleton className='w-[400px] h-screen flex-1' />
   ) : (
     <div className='pr-4 bg-white border-r w-[400px] flex-shink'>

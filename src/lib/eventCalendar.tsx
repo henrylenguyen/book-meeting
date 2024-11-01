@@ -1,27 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatDateTimeToIOS } from '@/lib/utils'
-import { addDays } from 'date-fns'
+import { formatDateTimeToISO } from '@/lib/utils'
 
 // Extract appointments and events, and transform for FullCalendar
 
-export const calendarEvents = (appointments: any, events: any) => {
+export const calendarEvents = (appointments: any[], events: any[]) => {
   return [...appointments, ...events].map((item) => {
-    const timezoneOffset = item.timezone.match(/UTC ([+-]\d+)/)?.[1] ?? '+00:00'
+    const { eventTime, title, description, location, attendees } = item
 
-    const start = formatDateTimeToIOS(item.eventTime.startDate, item.eventTime.startTime, timezoneOffset) ?? ''
-    const end = formatDateTimeToIOS(item.eventTime.endDate, item.eventTime.endTime, timezoneOffset) ?? ''
-
-    const startDate = new Date(start)
-    const endDate = new Date(end)
+    const start = formatDateTimeToISO(eventTime.startDate, eventTime.startTime) ?? ''
+    const end = formatDateTimeToISO(eventTime.endDate, eventTime.endTime) ?? ''
 
     return {
-      title: item.title,
-      start: addDays(startDate, -1).toISOString(),
-      end: addDays(endDate, -1).toISOString(),
+      title,
+      start,
+      end,
       extendedProps: {
-        description: item.description,
-        location: item.location,
-        attendees: item?.attendees?.map((attendee: any) => attendee.name).join(', ')
+        description,
+        location,
+        attendees: attendees?.map((attendee: any) => attendee.name).join(', ') || ''
       }
     }
   })

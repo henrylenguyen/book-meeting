@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 const LanguageContext = createContext({
   language: 'en',
-  // eslint-disable-next-line prettier/prettier, unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars, prettier/prettier
   OnChangeLanguage: (_lang: string) => { }
 })
 
@@ -22,26 +22,24 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       localStorage.setItem('appLanguage', lang)
 
       const currentPath = location.pathname.split('/').slice(2).join('/') || ''
-      if (currentPath) {
-        navigate(`/${lang}/${currentPath}`, { replace: true })
-      } else {
-        navigate(`/${lang}`, { replace: true })
-      }
+      navigate(`/${lang}/${currentPath}`, { replace: true })
     },
     [location.pathname, navigate]
   )
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search)
-    const urlLang = searchParams.get('lang')
-
-    if (urlLang) {
-      OnChangeLanguage(urlLang)
-    } else {
-      const savedLanguage = localStorage.getItem('appLanguage') ?? 'en'
-      OnChangeLanguage(savedLanguage)
+    const currentLangFromURL = (location.pathname.split('/')[1] || localStorage.getItem('appLanguage')) ?? 'en'
+    if (currentLangFromURL !== language) {
+      OnChangeLanguage(currentLangFromURL)
     }
-  }, [location.search, OnChangeLanguage])
+  }, [location.pathname, OnChangeLanguage, language])
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      const storedLanguage = localStorage.getItem('appLanguage') ?? 'en'
+      navigate(`/${storedLanguage}`, { replace: true })
+    }
+  }, [location.pathname, navigate])
 
   const contextValue = React.useMemo(() => ({ language, OnChangeLanguage }), [OnChangeLanguage, language])
 

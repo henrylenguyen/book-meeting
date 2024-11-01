@@ -15,17 +15,14 @@ import {
 } from '@/components/ui/formField'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { MOCK_DATA_USER } from '@/constants/mock-user'
+import { useFetchOnlineEvents } from '@/hooks/useAppointmentEvent'
+import { useCreateData } from '@/hooks/useCRUDQuery'
 import { generateJitsiURL, getEventTime, systemTimezone } from '@/lib/utils'
 import eventDialogSchema from '@/schema/eventDialog'
-import useAppointmentStore from '@/store/appointment'
-import useEventStore from '@/store/event'
-import { IAppointmentStore } from '@/types/appointmentType'
-import { IEventStore } from '@/types/eventType'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PencilIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -37,11 +34,26 @@ interface IEventDialogProps {
 
 const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogOpen, setIsDialogOpen }) => {
   const { t } = useTranslation()
-  const { createNewAppointment, success } = useAppointmentStore((state) => state as IAppointmentStore)
-  const { onlineEvents } = useEventStore((state) => state as IEventStore)
 
+  const { data: onlineEvents } = useFetchOnlineEvents()
   const [tabValue, setTabValue] = useState('appointment')
   const [loadingBtn, setLoadingBtn] = useState(false)
+  const createNewAppointment = useCreateData(
+    '/appointments/create',
+    {
+      onSuccessMessage: 'Appointment created successfully!',
+      onErrorMessage: 'Could not create the appointment.'
+    },
+    ['appointments']
+  )
+  const createNewEvent = useCreateData(
+    '/events/create',
+    {
+      onSuccessMessage: 'Event created successfully!',
+      onErrorMessage: 'Could not create the event.'
+    },
+    ['events']
+  )
 
   const form = useForm({
     resolver: zodResolver(eventDialogSchema),
@@ -102,7 +114,7 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
         }
         try {
           setLoadingBtn(true)
-          await createNewAppointment(event)
+          await createNewAppointment.mutateAsync(event)
           setLoadingBtn(false)
           form.reset({
             title: '',
@@ -113,8 +125,6 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
           setIsDialogOpen(false)
         } catch (error) {
           setLoadingBtn(false)
-          console.error('Failed to create appointment:', error)
-          toast.error('Failed to create appointment')
         }
       } else {
         const event = {
@@ -127,7 +137,7 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
         }
         try {
           setLoadingBtn(true)
-          await createNewAppointment(event)
+          await createNewEvent.mutateAsync(event)
           setLoadingBtn(false)
           form.reset({
             title: '',
@@ -139,11 +149,11 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
         } catch (error) {
           setLoadingBtn(false)
           console.error('Failed to create event:', error)
-          toast.error('Failed to create event')
+          // toast.error('Failed to create event')
         }
       }
     },
-    [tabValue, createNewAppointment, success, setIsDialogOpen, form]
+    [tabValue, createNewAppointment, form, setIsDialogOpen, onlineEvents]
   )
 
   return (

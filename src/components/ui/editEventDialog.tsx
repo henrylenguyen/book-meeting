@@ -31,7 +31,7 @@ interface IEventDialogProps {
 }
 
 const EventDialog: React.FC<IEventDialogProps> = ({ isDialogOpen, setIsDialogOpen, eventData }) => {
-  console.log("eventData:", eventData)
+  console.log('eventData:', eventData)
   const { t } = useTranslation()
 
   const { data: onlineEvents } = useFetchOnlineEvents()
@@ -48,6 +48,8 @@ const EventDialog: React.FC<IEventDialogProps> = ({ isDialogOpen, setIsDialogOpe
   }, [eventData, form])
 
   const handleOnSubmit = useCallback(async (values: any) => {
+    console.log('values:', values)
+    setLoadingBtn(false)
     alert('Tính năng đang được phát triển')
   }, [])
 

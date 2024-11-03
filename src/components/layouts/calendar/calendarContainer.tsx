@@ -1,5 +1,6 @@
 import CalendarHeader from '@/components/layouts/calendar/calendarHeader'
-import EventDialog from '@/components/ui/eventDialog'
+import EventDialog from '@/components/ui/createEventDialog'
+import EditableEventDialog from '@/components/ui/editEventDialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLanguage } from '@/context/languageContext'
 import { useFetchAppointmentsAndEvents } from '@/hooks/useAppointmentEvent'
@@ -23,7 +24,15 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
   const calendarRef = useRef<FullCalendar>(null)
   const { language } = useLanguage()
   const [selectedDateRange, setSelectedDateRange] = React.useState<{ start: string; end: string } | null>(null)
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false)
+  const [createDialogOpen, setCreateDialogOpen] = React.useState(false)
+  const [editDialogOpen, setEditDialogOpen] = React.useState<{
+    isOpen: boolean
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any
+  }>({
+    isOpen: false,
+    data: null
+  })
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { dataAppointment, dataEvents, isLoading } = useFetchAppointmentsAndEvents()
 
@@ -63,7 +72,7 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
             start: info.startStr,
             end: adjustedEndStr
           })
-          setIsDialogOpen(true)
+          setCreateDialogOpen(true)
         }}
         selectAllow={(selectInfo) => {
           const today = new Date()
@@ -104,13 +113,30 @@ const CalenadarContainer: React.FunctionComponent<ICalenadarContainerProps> = ()
         nowIndicator={true}
         dayMaxEventRows={2} // Limits the number of rows displayed on a single day cell
         dayMaxEvents={3} // Limits the number of events displayed on a single day cell
-      // eventClick={(info) => { }}
+        eventClick={(info) => {
+          console.log('info:', info)
+          info.jsEvent.preventDefault()
+          info.jsEvent.stopPropagation()
+          const eventData = [...dataAppointment, ...dataEvents].find((event) => event.id === info.event.id)
+          console.log('eventData:', eventData)
+          setEditDialogOpen({
+            isOpen: true,
+            data: eventData
+          })
+        }}
       />
-      {isDialogOpen && (
+      {createDialogOpen && (
         <EventDialog
           selectedDateRange={selectedDateRange}
-          isDialogOpen={isDialogOpen}
-          setIsDialogOpen={setIsDialogOpen}
+          isDialogOpen={createDialogOpen}
+          setIsDialogOpen={setCreateDialogOpen}
+        />
+      )}
+      {editDialogOpen && (
+        <EditableEventDialog
+          isDialogOpen={editDialogOpen.isOpen}
+          setIsDialogOpen={() => setEditDialogOpen({ isOpen: !editDialogOpen.isOpen, data: null })}
+          eventData={editDialogOpen.data}
         />
       )}
       <ReactTooltip id='event-tooltip' place='top' />

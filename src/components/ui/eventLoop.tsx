@@ -20,7 +20,7 @@ interface EventLoopProps {
   }) => void
 }
 
-export const EventLoop = ({ value, onChange }: EventLoopProps) => {
+export const EventLoop = ({ value, onChange, ...props }: EventLoopProps) => {
   const [selectedOption, setSelectedOption] = useState<string>(value?.repeatUnit || 'Does not repeat')
   const [isCustomDialogOpen, setIsCustomDialogOpen] = useState<boolean>(false)
 
@@ -47,7 +47,7 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
   }
 
   return (
-    <div>
+    <div className=' flex-grow '>
       <Select
         value={selectedOption}
         onValueChange={(newValue) => {
@@ -64,7 +64,7 @@ export const EventLoop = ({ value, onChange }: EventLoopProps) => {
           }
         }}
       >
-        <SelectTrigger className='w-[200px] border-0 border-b rounded-none border-solid'>
+        <SelectTrigger className='w-full  border-0 border-b rounded-none border-solid' {...props}>
           <SelectValue placeholder={selectedOption} />
         </SelectTrigger>
         <SelectContent>

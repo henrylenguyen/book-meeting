@@ -4,9 +4,9 @@ import { formatCurrentTime, generateTimeOptions } from '@/lib/utils'
 import React, { useEffect, useRef, useState } from 'react'
 
 interface TimePickerProps {
-  value: string // The current value of the field passed by react-hook-form
-  onChange: (value: string) => void // The function to update the field value in react-hook-form
-  interval?: number // Optional time interval in minutes (default: 15)
+  value: string
+  onChange: (value: string) => void
+  interval?: number
 }
 
 const TimePicker: React.FC<TimePickerProps> = ({ value, onChange, interval = 15 }) => {
@@ -73,7 +73,7 @@ const TimePicker: React.FC<TimePickerProps> = ({ value, onChange, interval = 15 
       {isVisible && (
         <div
           ref={timepickerRef}
-          className='absolute right-0 mt-2 h-[262px] w-full overflow-hidden overflow-y-auto rounded-md border border-stroke bg-white p-2  dark:bg-dark-2'
+          className='absolute right-0 mt-2 h-[262px] w-full overflow-hidden overflow-y-auto rounded-md border border-stroke bg-white p-2  dark:bg-dark-2 z-[9999]'
         >
           {times.map((time, index) => {
             const timeString = `${time.hour}:${time.minute} ${time.period}`
@@ -83,11 +83,11 @@ const TimePicker: React.FC<TimePickerProps> = ({ value, onChange, interval = 15 
               <button
                 key={index}
                 ref={isSelected ? selectedOptionRef : null} // Set ref only for the selected option
-                className={`time-option w-full flex cursor-pointer justify-between items-center gap-1 rounded-md transition ${isSelected ? 'selected-time' : ''}`}
+                className={`time-option w-full flex cursor-pointer justify-between items-center gap-1  rounded-md transition  ${isSelected ? 'selected-time' : ''}`}
                 onClick={() => handleTimeSelection(time.hour, time.minute, time.period)}
               >
                 <div
-                  className={`hour flex h-[46px] w-full max-w-[46px] items-center justify-center rounded-md text-sm font-medium ${isSelected ? 'bg-blue-dark text-white' : ''}`}
+                  className={`hour flex h-[46px] w-full max-w-[46px]  items-center justify-center rounded-md text-sm font-medium ${isSelected ? 'bg-blue-dark text-white' : ''}`}
                 >
                   {time.hour}
                 </div>

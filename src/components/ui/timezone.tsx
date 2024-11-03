@@ -8,7 +8,7 @@ interface TimezoneDropdownProps {
   onChange: (value: string) => void
 }
 
-const TimezoneDropdown: React.FC<TimezoneDropdownProps> = ({ onChange }) => {
+const TimezoneDropdown: React.FC<TimezoneDropdownProps> = ({ onChange, ...props }) => {
   const timezones = moment.tz.names()
 
   const { itemsData } = useInfiniteScroll({
@@ -22,7 +22,7 @@ const TimezoneDropdown: React.FC<TimezoneDropdownProps> = ({ onChange }) => {
   }
   return (
     <Select onValueChange={handleOnChange}>
-      <SelectTrigger className='w-[200px] border-0 border-b rounded-none border-solid'>
+      <SelectTrigger className='w-[200px] border-0 border-b rounded-none border-solid' {...props}>
         <SelectValue placeholder={systemTimezone ?? 'Time Zone'} />
       </SelectTrigger>
       <SelectContent className='timezone-content'>

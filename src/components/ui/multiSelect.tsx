@@ -12,7 +12,7 @@ interface MultiSelectProps {
   data: SearchDataResult[]
 }
 
-const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder, data }) => {
+const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder, data, ...props }) => {
   const [query, setQuery] = useState<string>('')
   const [filteredOptions, setFilteredOptions] = useState<SearchDataResult[]>([])
   const [loading, setLoading] = useState<boolean>(false)
@@ -99,6 +99,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ value, onChange, placeholder,
             value={query}
             placeholder={placeholder ?? 'Type to search...'}
             onChange={(e) => setQuery(e.target.value)}
+            {...props}
           />
         </div>
         {query.length > 0 && (

@@ -14,6 +14,7 @@ export const calendarEvents = (appointments: any[], events: any[]) => {
       title,
       start,
       end,
+      id: item.id,
       extendedProps: {
         description,
         location,

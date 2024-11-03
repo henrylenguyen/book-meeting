@@ -186,7 +186,7 @@ const EventDialog: React.FC<IEventDialogProps> = ({ selectedDateRange, isDialogO
                 <FormInputField name='title' placeholder='Add title (required)' icon={PencilIcon} isAutofocus />
                 <FormMultiSelectField name='attendees' placeholder='Add optional attendees' data={MOCK_DATA_USER} />
                 <FormDateTimeField name='eventTime' />
-                <div className='flex gap-4 items-center'>
+                <div className='grid grid-cols-3  gap-4 items-center'>
                   <FormLoopEventField name='recurrence' />
                   <FormTimeZoneField name='timezone' />
                   <FormColorPickerField name='color' />
